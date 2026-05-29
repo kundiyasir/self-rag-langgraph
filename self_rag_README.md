@@ -80,8 +80,9 @@ Question
 
 ```
 Orchestration    LangGraph (StateGraph, conditional edges, retry loops)
-LLM Framework    LangChain (ChatOpenAI, ChatPromptTemplate, structured output)
-Embeddings       OpenAI text-embedding-3-large
+LLM Framework    LangChain (ChatGroq, ChatPromptTemplate, structured output)
+LLM              Groq — llama-3.1-8b-instant
+Embeddings       HuggingFace sentence-transformers (all-MiniLM-L6-v2)
 Vector Store     FAISS
 Structured IO    Pydantic BaseModel (typed decision nodes)
 Web Search       Tavily Search API
@@ -105,13 +106,16 @@ Document Load    PyPDFLoader (LangChain Community)
 1. Clone the repo
 2. Install dependencies:
 ```bash
-pip install langchain langchain-community langgraph langchain-openai faiss-cpu pydantic python-dotenv tavily-python pypdf
+pip install langchain langchain-community langchain-groq langgraph faiss-cpu pydantic python-dotenv sentence-transformers langchain-huggingface tavily-python pypdf
 ```
 3. Create a `.env` file:
 ```
-OPENAI_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
 TAVILY_API_KEY=your_key_here
 ```
+   The notebooks load this `.env` automatically via `python-dotenv`. If you run
+   them in Google Colab instead, store the same keys as Colab secrets and they
+   will be picked up as a fallback.
 4. Add your PDF documents to a `documents/` folder
 5. Run notebooks in order (step1 → step7 → web)
 
